@@ -12,7 +12,11 @@ const MovieSchema=new Schema({ // movie şemamızı oluşturuyoruz
     country : String,
     year : Number,
     imbd_score : Number,
-    director_id : Schema.Types.ObjectId
+    director_id : Schema.Types.ObjectId,
+    date : {
+        type : Date,
+        required : Date.now
+    }
 
 });
 
