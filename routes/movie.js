@@ -50,18 +50,62 @@ router.get('/',(req,res)=>{
 
 });
 //film idsine göre filmlerin json olarak dönmesi
-router.get('/:movie_id',(req,res)=>{
-  //  res.send(req.params); //'/:movie:id deki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
-  const promise = Movie.findById(req.params.movie_id); //burada mongodbde sorgu yapıyoruz idye eşitse tarzı bişey
 
-  promise.then((movie)=>{
+
+  router.get('/:movie_id', (req, res, next) => {
+    //  res.send(req.params); //'/:movie:id deki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
+
+    const promise = Movie.findById(req.params.movie_id);//burada mongodbde sorgu yapıyoruz idye eşitse tarzı
+
+    promise.then((movie) => {
+    if (!movie)
+      next({ message: 'Film Bulunamadı.', code: 99 });
+
     res.json(movie);
-
-  }).catch((err)=>{
+  }).catch((err) => {
     res.json(err);
   });
-
-
 });
+
+//Film Güncelleme idye göre
+router.put('/:movie_id', (req, res, next) => {
+  //  res.send(req.params); //'/:movie:id deki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
+
+  const promise = Movie.findByIdAndUpdate(//burada mongodbde sorgu yapıyoruz idye eşitse tarzı
+      req.params.movie_id,
+      req.body,//yeni gelicek datanın bodysi
+      {
+        new : true //güncellenen veri dönsün diye eger bunu yapmassak dönüş eski veri oluyor
+      }
+  );
+  promise.then((movie) => {
+    if (!movie)
+      next({ message: 'Film Bulunamadı.', code: 98 });
+
+    res.json({status : 1}); //status :1 daha mantıklı movie yazarsak direk degerler gelicek
+  }).catch((err) => {
+    res.json(err);
+  });
+});
+
+
+//
+router.delete('/:movie_id', (req, res, next) => {
+  //  res.send(req.params); //'/:movie:id deki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
+
+  const promise = Movie.findByIdAndRemove(req.params.movie_id);//burada mongodbde sorgu yapıyoruz idye eşitse tarzı
+
+  promise.then((movie) => {
+    if (!movie)
+      next({ message: 'Film Silinemedi.', code: 97 });
+
+    res.json({status: 1});
+  }).catch((err) => {
+    res.json(err);
+  });
+});
+
+
+
 
 module.exports = router;
