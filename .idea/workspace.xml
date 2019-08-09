@@ -30,8 +30,15 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="10.16.2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/routes" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mustafa\Desktop\movie-api\nodejs-movie-api\routes" />
+      <recent name="C:\Users\Mustafa\Desktop\movie-api\nodejs-movie-api\Models" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -60,7 +67,7 @@
       <workItem from="1565298695264" duration="3048000" />
       <workItem from="1565307421506" duration="3106000" />
       <workItem from="1565349853008" duration="4898000" />
-      <workItem from="1565381670929" duration="601000" />
+      <workItem from="1565381670929" duration="3906000" />
     </task>
     <servers />
   </component>
