@@ -132,8 +132,29 @@ router.get('/:directory_id', (req, res, next)=> {
     res.json(err);
   });
 
-});
 
+});
+//yonetmen put
+router.put('/:directory_id', (req, res, next) => {
+  //  res.send(req.params); //'/:directory_iddeki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
+
+  const promise = Director.findByIdAndUpdate(//burada mongodbde sorgu yapıyoruz idye eşitse tarzı
+      req.params.directory_id,
+      req.body,//yeni gelicek datanın bodysi
+      {
+        new : true //güncellenen veri dönsün diye eger bunu yapmassak dönüş eski veri oluyor
+      }
+  );
+  promise.then((director) => {
+    if (!director)
+      next({ message: 'director Bulunamadı.', code: 98 });
+
+    res.json({status : 1}); //status :1 daha mantıklı movie yazarsak direk degerler gelicek
+  }).catch((err) => {
+    res.json(err);
+  });
+
+});
 
 
 
