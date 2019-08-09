@@ -60,6 +60,26 @@ router.get('/top10',(req,res)=>{
 
 });
 
+//iki tarih arasındaki filmleri listeleme
+
+router.get('/between/:start_year/:end_year',(req,res)=>{
+
+  const {start_year,end_year}=req.params;
+  const promise=Movie.find(
+      {
+        year:{"$gte":parseInt(start_year) ,"$lte":parseInt(end_year)}//gte:büyük veya eşit lte:küçük veya eşit
+      }
+  );
+  promise.then((data)=>{
+
+    res.json(data);
+
+  }).catch((err)=>{
+    res.json(err);
+  });
+
+});
+
 
 //film idsine göre filmlerin json olarak dönmesi
   router.get('/:movie_id', (req, res, next) => {
