@@ -15,9 +15,9 @@ const MovieSchema=new Schema({ // movie şemamızı oluşturuyoruz
     director_id : Schema.Types.ObjectId,
     date : {
         type : Date,
-        required : Date.now
+        default : Date.now
     }
 
 });
 
-mongoose.model('moview',MovieSchema); // şemayı oluşturduk ve dışarı aktardık.
+module.exports = mongoose.model('movie', MovieSchema); // şemayı oluşturduk ve dışarı aktardık.
