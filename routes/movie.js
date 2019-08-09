@@ -46,12 +46,22 @@ router.get('/',(req,res)=>{
      res.json(err);
    });
 
+});
+//top10 list endpoint
+router.get('/top10',(req,res)=>{
+  const promise=Movie.find({}).limit(10).sort({imbd_score:-1}); //burda sıralamasını yapıoyruz bir nevi sorgu -1 büyükten küçüge dogru sıralıyor
+  promise.then((data)=>{
 
+    res.json(data);
+
+  }).catch((err)=>{
+    res.json(err);
+  });
 
 });
+
+
 //film idsine göre filmlerin json olarak dönmesi
-
-
   router.get('/:movie_id', (req, res, next) => {
     //  res.send(req.params); //'/:movie:id deki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
 
