@@ -34,4 +34,34 @@ router.post('/', (req, res, next)=> {
 
 });
 
+//filmleri listele
+
+router.get('/',(req,res)=>{
+   const promise=Movie.find({});
+   promise.then((data)=>{
+
+     res.json(data);
+
+   }).catch((err)=>{
+     res.json(err);
+   });
+
+
+
+});
+//film idsine göre filmlerin json olarak dönmesi
+router.get('/:movie_id',(req,res)=>{
+  //  res.send(req.params); //'/:movie:id deki deger ne ise req.params'a düşer(yani burdaki parametre neyse req.paramsa düşşer)
+  const promise = Movie.findById(req.params.movie_id); //burada mongodbde sorgu yapıyoruz idye eşitse tarzı bişey
+
+  promise.then((movie)=>{
+    res.json(movie);
+
+  }).catch((err)=>{
+    res.json(err);
+  });
+
+
+});
+
 module.exports = router;
